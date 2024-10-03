@@ -145,6 +145,19 @@ For GraphRAG we use the Neo4j Vector Index (and a fulltext index for hybrid sear
 
 For Vector only RAG we only use the vector and fulltext index (hybrid) search results and don't include additional information from the entity graph.
 
+=== Hybrid Retriever
+
+The Hybrid Retriever combines the strengths of both unstructured and structured data retrieval.
+Vector and Keyword Indexes: This retriever uses both vector and keyword indexes to search through unstructured text data. It then combines this information with the data collected from the knowledge graph, ensuring a more robust retrieval process.
+Integration with LLM: The collected data from both unstructured and structured sources is fed into an LLM to generate the final answer. This hybrid approach enhances the accuracy and relevance of the responses.
+
+=== Graph Retriever
+
+The Graph Retriever is a key component in the Neo4j LLM Knowledge Graph Builder. It leverages the structured data stored in the Neo4j graph database to retrieve relevant information.
+Entity Identification: The graph retriever starts by identifying relevant entities in the input, such as people, organizations, and locations. This is achieved using Large Language Models (LLMs) to extract these entities from the text.
+Neighborhood Retrieval: Once the entities are identified, the retriever uses Cypher queries to retrieve the neighborhood of these entities. This involves fetching the direct and indirect relationships of the identified nodes, which helps in providing a more comprehensive context.
+
+
 === Answer Generation
 
 The various inputs and determined sources (the question, vector results, entities (name + description), relationship pairs, chat history) are all sent to the selected LLM model as context information in a custom prompt, asking to provide and format a response to the question asked based on the elements and context provided. 
